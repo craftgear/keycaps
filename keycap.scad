@@ -5,18 +5,18 @@ $fa = 5;
 
 debug = false;
 
-module rounded_cube(size, r) {
+module rounded_cube(size, radius) {
   divide_unit = 0.5;
   hull() {
-      cube([size[0] - radius*2, size[1] - r*2, size[2]] - r, center = true);
-      translate([ - ( size[0]/2 - r ), - ( size[1]/2 - r ), 0])
-          sphere(r = radius, h = 0.1, center=true);
-      translate([size[0]/2 - r, - ( size[1]/2 - r ) , 0])
-          sphere(r = radius, h = 0.1, center=true);
-      translate([- ( size[0]/2 - r ), size[1]/2 - r  , 0])
-          sphere(r = radius, h = 0.1, center=true);
-      translate([ size[0]/2 - r, size[1]/2 - r  , 0])
-          sphere(r = radius, h = 0.1, center=true);
+      cube([size[0] - radius*2, size[1] - radius*2, size[2]] - radius, center = true);
+      translate([ - ( size[0]/2 - radius ), - ( size[1]/2 - radius ), 0])
+          sphere(r = radius, center=true);
+      translate([size[0]/2 - radius, - ( size[1]/2 - radius ) , 0])
+          sphere(r = radius, center=true);
+      translate([- ( size[0]/2 - radius ), size[1]/2 - radius  , 0])
+          sphere(r = radius, center=true);
+      translate([ size[0]/2 - radius, size[1]/2 - radius  , 0])
+          sphere(r = radius, center=true);
   }
 }
 
@@ -46,9 +46,9 @@ module outer_shape(top_side, bottom_side, height) {
 	
   hull() {
     translate([0,0,height]) {
-      rounded_cube([top_side, top_side, top_shape_thickness], 2);
+      rounded_cube([top_side, top_side, top_shape_thickness], 2.5);
     };
-    rounded_square(bottom_side, bottom_side, 2.5);
+    rounded_square(bottom_side, bottom_side, 0.5);
   };
 }
 
@@ -57,7 +57,7 @@ module inner_shape(top_side, bottom_side, stem_height, wall_thickness) {
     translate([0,0,stem_height]) {
       rounded_cube([top_side, top_side , 0.0001], 2.5);
     };
-    rounded_square(bottom_side - wall_thickness * 2, bottom_side - wall_thickness * 2, 0.0001, 2.5);
+    rounded_square(bottom_side - wall_thickness * 2, bottom_side - wall_thickness * 2, 0.0001, 0.5);
   }
 }
 
